@@ -1,0 +1,16 @@
+{
+  "name": "02_basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "routes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start-server": "node server.js"
+  },
+  "author": "gova",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

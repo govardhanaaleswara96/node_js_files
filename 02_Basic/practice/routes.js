@@ -1,54 +1,52 @@
 const fs = require("fs");
 
-const requestHandler = (req, res) => {
+const reqHandler = (req, res) => {
   const url = req.url;
   const method = req.method;
-  console.log(url);
-  console.log(method);
+  //console.log(url);
+  //console.log(method);
+  //console.log(req.headers);
   if (url === "/") {
+    // res.setHeader("Content_type", "text/html");
     res.write(`
-      <html>
-      <head>
-      <title>Node Js</title>
-      </head>
-      <body>
-          <form action="/msg"  method="POST">
-              <input type="text" name="msg">
-              <button>Send Request</button>
+          <html>
+          <body>
+          <form action="/msg" method="POST"  >
+            <input type="text" name="msg">
+            <button>Submit</button>
           </form>
-      </body>
-     </html>
+          </body>
+          </html>
       `);
     return res.end();
   }
   if (url === "/msg" && method === "POST") {
+    console.log("hii");
     const body = [];
     req.on("data", chunk => {
       body.push(chunk);
     });
     return req.on("end", () => {
       const parseBody = Buffer.concat(body).toString();
-      const text = parseBody.split("=")[1];
+      const msg = parseBody.split("=")[1];
       console.log(parseBody);
-      console.log(text);
-      fs.writeFileSync("Msg.txt", text);
-      res.statusCode = 302;
-      res.setHeader("Location", "/");
-      res.end();
+      console.log(msg);
+      //   fs.writeFileSync("Msg.txt", msg);
+      fs.writeFile("Msg.txt", msg, err => {
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+        return res.end();
+      });
     });
   }
-  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Content_type", "text/html");
   res.write(`
-     <html>
-      <head>
-      <title>Node Js</title>
-      </head>
+      <html>
       <body>
-      <h1>NODE JS SERVER RESPONSE</h1>
+          <h1>I AM NODE JS SERVER</h1>
       </body>
-     </html>
+      </html>
     `);
   res.end();
 };
-
-module.exports = requestHandler;
+module.exports = reqHandler;
