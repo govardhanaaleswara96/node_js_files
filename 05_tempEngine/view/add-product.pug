@@ -1,0 +1,14 @@
+extends layout/main-layout.pug
+
+block content
+    // container
+    .container.mt-5
+        .row
+            .col-md-3
+            .col-md-8
+              h3.text-center Add Product
+                form(action='/add-product' method='POST')
+                    input.form-control(type='text' name='title')
+                    .text-center
+                    button.btn.btn-info Add Products
+            .col-md-3

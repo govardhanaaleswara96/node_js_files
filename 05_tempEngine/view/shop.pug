@@ -1,0 +1,34 @@
+extends layout/main-layout.pug
+
+block content
+    .container.mt-5
+      .row
+        .col-md-3
+        .col-md-8
+          h3 My Product
+          p List All Products
+        .col-md-3
+    .container
+          if prod.length > 0
+            .row
+                    .col-md-3
+                    .col-md-6
+                      each product in prod 
+                        .card
+                          // Card image
+                          img.card-img-top(src='https://mdbootstrap.com/img/Photos/Others/images/43.jpg' alt='Card image cap')
+                          // Card content
+                          .card-body
+                            // Title
+                            h4.card-title
+                              a #{product.title}
+                            // Text
+                            p.card-text
+                              | Some quick example text to build on the card title and make up
+                              | the bulk of the card&apos;s content.
+                            // Button
+                            a.btn.btn-primary(href='#') Button
+                      // Card     
+                    .col-md-3
+          else 
+            h1 No Product 
