@@ -1,17 +1,17 @@
-const http = require("http");
 const express = require("express");
-const bodyParser = require("body-parser");
-const adminRoute = require("./router/admin");
-const showRoute = require("./router/shop");
 const path = require("path");
-
+const bodyparser = require("body-parser");
+const productRoutes = require("./router/add-product");
+const shopRoutes = require("./router/shop");
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(adminRoute);
-app.use(showRoute);
+app.set("view engine", "ejs");
+app.set("views", "views");
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(productRoutes.router);
+app.use(shopRoutes);
 app.use((req, res) => {
-  res.status(404).sendfile(path.join(__dirname, "views", "404.html"));
+  //   res.sendFile(path.join(__dirname, "views", "404.html"));
+  res.render("404", { pageTitle: "Not Found" });
 });
-const server = http.createServer(app);
 
-server.listen(3000);
+app.listen(3000);

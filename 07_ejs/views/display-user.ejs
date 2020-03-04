@@ -1,0 +1,36 @@
+<%- include('includes/head.ejs') %>
+
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center font-weight-bold">User List</h3>
+      <% if(userData.length > 0) { %>
+      <table class="table table-bordered text-center">
+        <thead class="default-color text-white">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>City</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let products of userData ) {%>
+          <tr>
+            <td><%=products.name%></td>
+            <td><%=products.email%></td>
+            <td><%=products.age%></td>
+            <td><%=products.gender%></td>
+            <td><%=products.city%></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else{ %>
+      <h1 class="text-center">No User Found</h1>
+      <% }%>
+    </div>
+  </div>
+</div>
+<%- include('includes/end.ejs') %>
